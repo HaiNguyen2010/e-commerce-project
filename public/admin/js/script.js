@@ -39,3 +39,20 @@ if(formSearch) {
     })
 }
 // End Form Search
+
+// Pagination
+const paginationButtons = document.querySelectorAll("[button-pagination]");
+
+if(paginationButtons.length > 0) {
+    let url = new URL(window.location.href);
+    paginationButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const page = button.getAttribute("button-pagination");
+            
+            url.searchParams.set("page", page);
+
+            window.location.href = url.href;
+        });
+    })
+}
+// End Pagination
