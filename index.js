@@ -1,5 +1,5 @@
 const express = require("express");
-
+const methodOverride = require("method-override");
 const route = require("./routes/clients/index.route");
 const routeAdmin = require("./routes/admin/index.route.js");
 
@@ -19,6 +19,7 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 // App Locals Variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
