@@ -56,6 +56,7 @@ module.exports.changeStatus = async (req, res) => {
 
     await Product.updateOne({ _id: id }, { status: status });
 
+    req.flash("success", "Change item status successfully!");
     // res.redirect("back");
     res.redirect(req.get("referer") || "/products");
 
@@ -69,9 +70,11 @@ module.exports.changeMulti = async (req, res) => {
     switch(type) {
         case "active":
             await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+            req.flash("success", `Update items status successfully!`);
             break;
         case "inactive":
             await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+            req.flash("success", `Update items status successfully!`);
             break;
         case "delete-selected":
             await Product.updateMany({ _id: ids }, { 
@@ -84,6 +87,7 @@ module.exports.changeMulti = async (req, res) => {
                 let [id, position] = item.split("-");
                 position = parseInt(position);
                 await Product.updateOne({ _id: id }, { position: position });
+                req.flash("success", `Update items position successfully!`);
             }
             break;
         default:
@@ -101,6 +105,7 @@ module.exports.deleteItem = async (req, res) => {
         deleted: true,
         deletedAt: new Date()
     });
+    req.flash("success", `Delete items successfully!`);
 
     res.redirect(req.get("referer") || "/products");
 }
