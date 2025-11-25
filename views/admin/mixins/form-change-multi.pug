@@ -7,8 +7,10 @@ mixin form-change-multi(path)
         .d-flex.align-items-start 
             .form-group 
                 select(name="type" class="form-control")
+                    option(disabled) -- Choose an activity --
                     option(value="active") Active 
                     option(value="inactive") Inactive 
+                    option(value="delete-selected") Delete Selected 
             .form-group 
                 input(
                     type="text"
